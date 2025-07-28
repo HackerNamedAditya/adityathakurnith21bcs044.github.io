@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aditya Thakur | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --text: #eaeaea;
+      --accent: #00ffff;
+      --card-bg: #1b1b1b;
+      --font: 'Orbitron', sans-serif;
+    }
+
+    body.light-mode {
+      --bg: #ffffff;
+      --text: #000000;
+      --accent: #0077ff;
+      --card-bg: #f0f0f0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+    }
+
+    section {
+      scroll-snap-align: start;
+    }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 2px 10px #00ffff66;
+    }
+
+    header h2 {
+      font-size: 1.6rem;
+      color: var(--accent);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: var(--text);
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: var(--accent);
+      text-shadow: 0 0 5px var(--accent);
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8rem 2rem 4rem;
+      text-align: center;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
+    }
+
+    .hero img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 25px var(--accent);
+      margin-bottom: 1.5rem;
+      animation: glow 3s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 20px var(--accent); }
+      to { box-shadow: 0 0 40px var(--accent); }
+    }
+
+    .typewriter h1 {
+      font-size: 2rem;
+      border-right: 3px solid var(--accent);
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 3s steps(30) forwards, blink 0.75s step-end infinite;
+    }
+
+    @keyframes typing { to { width: 100%; } }
+    @keyframes blink { 50% { border-color: transparent; } }
+
+    .hero-text p {
+      max-width: 600px;
+      line-height: 1.6;
+      margin: 1rem 0;
+      font-size: 1rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .btn-group a button {
+      background-color: var(--accent);
+      color: #000;
+      padding: 0.8rem 1.4rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-group a button:hover {
+      background-color: white;
+      color: black;
+    }
+
+    .section {
+      padding: 4rem 2rem;
+    }
+
+    .section h2 {
+      text-align: center;
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    .projects, .skills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background-color: var(--card-bg);
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #00ffff33;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: scale(1.05);
+    }
+
+    .project-card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .skills button {
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--accent);
+      background-color: transparent;
+      color: var(--accent);
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .skills button:hover {
+      background-color: var(--accent);
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    .social {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .social a {
+      color: var(--accent);
+      font-size: 2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .social a:hover {
+      transform: scale(1.2);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      background-color: #000;
+      color: var(--accent);
+    }
+
+    #cursor-trail {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transition: transform 0.1s ease;
+    }
+  </style>
+</head>
+<body>
+<div id="particles-js"></div>
+<div id="cursor-trail"></div>
+
+<header>
+  <h2>Aditya Thakur</h2>
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero" id="home" data-aos="fade-up">
+  <img src="/Screenshot (239).png" alt="Aditya">
+  <div class="hero-text">
+    <div class="typewriter"><h1>WebD | C++ | Python</h1></div>
+    <p>I’m Aditya Thakur, a final-year B.Tech CSE student at NIT Hamirpur (Batch of 2025). Passionate about development and problem-solving, this portfolio highlights my projects, skills, and interests.</p>
+    <div class="btn-group">
+      <a href="#skills"><button>Skills</button></a>
+      <a href="https://drive.google.com/file/d/16Q161YhS4RPL6qP53JrjaEtHYKCSK08p/view?usp=sharing" target="_blank"><button>Download Resume</button></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="projects" data-aos="fade-up">
+  <h2>Projects</h2>
+  <div class="projects">
+    <div class="project-card">
+      <h3>Dog Breed Classification</h3>
+      <img src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg" alt="Dog Breed Classification">
+      <p>CNN model using ReLU, Softmax, Adam optimizer & categorical-crossentropy. <br><a href="https://github.com/HackerNamedAditya/Major_project/blob/main/DogBreedClassification.ipynb" target="_blank">Source Code</a></p>
+    </div>
+    <div class="project-card">
+      <h3>Spell Checker Web App</h3>
+      <img src="https://images.pexels.com/photos/4458554/pexels-photo-4458554.jpeg" alt="Spell Checker">
+      <p>Flask app using TextBlob and LanguageTool. <br><a href="https://github.com/HackerNamedAditya/SpellChecker" target="_blank">Source Code</a></p>
+    </div>
+    <div class="project-card">
+      <h3>Alzheimer Detection</h3>
+      <img src="https://www.mayoclinic.org/-/media/kcms/gbs/patient-consumer/images/2023/02/01/20/24/brain-scan-images-for-diagnosis-of-alzheimers-8-col-3161040-003-1.jpg" alt="Alzheimer Detection">
+      <p>Multi-class CNN model with 98.3% accuracy. <br><a href="https://colab.research.google.com/drive/1Q_BvX1FOlLw4ncHMxSNUjZxmZm1P2r_7#scrollTo=6AJU7P0UGmNT=" target="_blank">Colab Link</a></p>
+    </div>
+    <div class="project-card">
+      <h3>Weather App</h3>
+      <img src="https://thumbs.dreamstime.com/b/vector-cartoon-d-weather-app-icon-set-cute-d-render-smartphone-forecast-concept-sunny-day-rain-clouds-lightning-rainy-374779743.jpg" alt="Weather App Project">
+      <p>Real-time weather using HTML, CSS, JS, API. <br><a href="https://github.com/HackerNamedAditya/Webdevelopment/blob/main/Weather_App.html" target="_blank">Source Code</a></p>
+    </div>
+    <div class="project-card">
+      <h3>Tic Tac Toe</h3>
+      <img src="https://static.vecteezy.com/system/resources/thumbnails/002/423/122/small_2x/tic-tac-toe-icon-illustration-free-vector.jpg" alt="Tic Tac Toe" style="width: 100%;aspect-ratio: 16 / 9;object-fit: cover;">
+      <p>2-player game using HTML, CSS, JS. <br><a href="https://github.com/HackerNamedAditya/Webdevelopment/blob/main/tictactoe.html" target="_blank">Source Code</a></p>
+    </div>
+    <div class="project-card">
+      <h3>Digital Clock</h3>
+      <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600" alt="Digital Clock">
+      <p>Live clock using HTML, CSS, JS. <br><a href="https://github.com/HackerNamedAditya/Webdevelopment/blob/main/digitalclock.html" target="_blank">Source Code</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="skills" data-aos="fade-up">
+  <h2>Skills</h2>
+  <div class="skills">
+    <button>C</button>
+    <button>C++</button>
+    <button>HTML <i class="fa-brands fa-html5"></i></button>
+    <button>CSS <i class="fa-brands fa-css3-alt"></i></button>
+    <button>JavaScript <i class="fa-brands fa-js"></i></button>
+    <button>Python <i class="fa-brands fa-python"></i></button>
+    <button>MySQL <i class="fa-solid fa-database"></i></button>
+    <button>NodeJS <i class="fa-brands fa-node"></i></button>
+    <button>ReactJS <i class="fa-brands fa-react"></i></button>
+  </div>
+</section>
+
+<section class="section" id="certifications" data-aos="fade-up">
+  <h2>Certifications</h2>
+  <div class="projects">
+    <div class="project-card">
+      <h3>AI Course (Verzeo Edutech)</h3>
+      <img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg" alt="AI">
+      <p><a href="https://drive.google.com/file/d/190ingEqIya2MWpYBul7kFcwmIwYGyW_u/view" target="_blank">View Certificate</a></p>
+    </div>
+    <div class="project-card">
+      <h3>Web Dev (Academor)</h3>
+      <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg" alt="Web Dev">
+      <p><a href="https://drive.google.com/file/d/1WGWb4_G9Ij56G8szQWODe71xl7G8O-wV/view" target="_blank">View Certificate</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact" data-aos="fade-up">
+  <h2>Contact</h2>
+  <p style="text-align:center; margin-top:1rem;">📞 +91 8219465380 <br> 📧 adityathakur27082004@gmail.com</p>
+  <div class="social">
+    <a href="https://www.instagram.com/adityathakur__0010/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://www.facebook.com/profile.php?id=100055297622517" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+    <a href="https://www.linkedin.com/in/aditya-thakur-60b769254" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+    <a href="https://github.com/HackerNamedAditya" target="_blank"><i class="fa-brands fa-github"></i></a>
+  </div>
+</section>
+
+<footer>
+  &copy; 2025 Aditya Thakur. All rights reserved.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+<script>
+  particlesJS.load('particles-js', 'https://raw.githubusercontent.com/VincentGarreau/particles.js/master/demo/particles.json');
+</script>
+<script>
+  const cursor = document.getElementById("cursor-trail");
+  document.addEventListener("mousemove", (e) => {
+    cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
+  });
+</script>
+<script>
+  function toggleMode() {
+    document.body.classList.toggle("light-mode");
+  }
+</script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+</body>
+</html>
